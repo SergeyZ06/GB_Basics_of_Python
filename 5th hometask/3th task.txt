@@ -1,0 +1,5 @@
+Ivanov 27000
+Petrov 18000
+Sidorov 24000
+Vasilev 15000
+Domov 21000
