@@ -8,20 +8,21 @@ i = 10
 # Переменная для суммирвоания чисел
 sum_digits = 0
 
+# Генерация случайных чисел в списке
+list_random_numbers = [randint(0, 100) for j in range(1, i + 1)]
+# Запись сгенерированных чисел в строку через пробел
+str_random_numbers = ' '.join(str(j) for j in list_random_numbers)
+
 # Менеджер контекста: создание/перезапись файла для записи набора чисел
 with open(file_name, 'w') as file:
-    # Запись первого числа в файл
-    file.write(str(randint(0, 100)))
-    # Цикл для записи чисел через пробел
-    while i > 0:
-        i -= 1
-        file.writelines(' ' + str(randint(0, 100)))
+    # Запись в файл строки с числами
+    file.write(str_random_numbers)
 
 # Менеджер контекста: открытие файла в режиме чтения для чтения чисел
 with open(file_name, 'r') as file:
     # Для каждого обнаруженного числа в файле
     for digit in file.read().split():
         # суммировать в переменную
-        sum_digits = sum_digits + int(digit)
+        sum_digits += int(digit)
 
 print(f'Totals:\t{sum_digits}')

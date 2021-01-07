@@ -10,13 +10,15 @@ with open(file_name, 'r') as file:
 
     # Построчное чтение файла
     for line in file:
+        # Получение фамилии сотрудника и зарплаты из строки файла
+        line_person, line_wage = line.split()
         # Суммирование всех зарплат
-        avg_wage = avg_wage + int(line.split()[1])
+        avg_wage += int(line_wage)
         # Подсчёт колличества сотрудников
         employee_count += 1
-        # Поиск и анализ втрого слова в кажой строке - зарплаты
-        if float(line.split()[1]) < 20000:
-            print(f'{line.split()[0]} has wage less than 20000')
+        # Анализ зарплаты
+        if float(line_wage) < 20000:
+            print(f'{line_person} has wage less than 20000')
 
     # Вычисление средней заработной платы
     avg_wage = avg_wage / employee_count
