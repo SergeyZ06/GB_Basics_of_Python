@@ -7,6 +7,7 @@ class Car:
     # is_police     - принадлежность к полиции, необязательный аргумент, по умолчанию Нет
     def __init__(self, name, color='Black', speed=0, is_police=False):
         self.name, self.color, self.speed, self.is_police = name, color, speed, is_police
+        self.direction = None
 
     # Метод Поехать
     # может принимать аргумент скорость
@@ -35,19 +36,19 @@ class Car:
 # Определение класса Городская машина
 class TownCar(Car):
     # Приватная переменная для хранения разрешённой скорости
-    __allowed_speed = 60
+    _allowed_speed = 60
 
     # Переопределение метода Показать скорость
     def show_speed(self):
         # Если скорость меньше максимальной разрешённой скорости
-        if self.speed <= self.__allowed_speed:
+        if self.speed <= self._allowed_speed:
             # то отобразить скорость
             print(f'{self.name}s speed is {self.speed} kmph')
         # иначе
         else:
             # отобразить скорость и предупреждение
             print(f'{self.name}s speed is {self.speed} kmph. '
-                  f'Exceeded legal amount on {self.speed - self.__allowed_speed} kmph!')
+                  f'Exceeded legal amount on {self.speed - self._allowed_speed} kmph!')
 
 
 # Определение класса Спортивная машина
@@ -56,21 +57,12 @@ class SportCar(Car):
 
 
 # Определение класса Рабочая машина
-class WorkCar(Car):
-    #
-    __allowed_speed = 40
+class WorkCar(TownCar):
+    # Приватная переменная для хранения разрешённой скорости
+    _allowed_speed = 40
 
-    #
-    def show_speed(self):
-        #
-        if self.speed <= self.__allowed_speed:
-            #
-            print(f'{self.name}s speed is {self.speed} kmph')
-        # иначе
-        else:
-            #
-            print(f'{self.name}s speed is {self.speed} kmph. '
-                  f'Exceeded legal amount on {self.speed - self.__allowed_speed} kmph!')
+    def aaa(self):
+        print(self._allowed_speed)
 
 
 # Определение класса Полицейская машина
@@ -97,9 +89,11 @@ print(f'\n', f'_'*30)
 new_work_car = WorkCar('New_work_car')
 new_work_car.go(50)
 new_work_car.show_speed()
+new_work_car.aaa()
 
 print(f'\n', f'_'*30)
 # Создание объекта класса Городская машина и вызов методов Остановиться и Показать скорость
 new_town_car = TownCar('New town car', 'Green', 70, True)
+new_town_car.show_speed()
 new_town_car.stop()
 new_town_car.show_speed()
